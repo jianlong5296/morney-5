@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="nav">
         <router-link to="/money">记账</router-link>
         |
         <router-link to="/labels">标签</router-link>
@@ -15,6 +15,8 @@
     };
 </script>
 
-<style scoped lang="scss">
-
+<style lang="scss" scoped> //scoped可以精准加样式，给当前div
+    .nav {
+        border: 1px solid red;
+    }
 </style>
