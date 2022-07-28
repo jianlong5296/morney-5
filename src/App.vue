@@ -9,7 +9,13 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-
+    }
+    body{
+        line-height: 1.5;
+    }
+    a{
+        text-decoration: none;  //去掉图标下方文字的下划线
+        color: inherit;
     }
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
