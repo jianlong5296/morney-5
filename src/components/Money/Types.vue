@@ -30,13 +30,6 @@
             }
             this.type = type;
         }
-        mounted() {
-            if (this.xxx === undefined) {
-                console.log('没有xxx')
-            } else {
-                console.log(this.xxx.toString());
-            }
-        }
     }
 </script>
 
