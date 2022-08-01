@@ -30,8 +30,9 @@
         inputContent(event:KeyboardEvent) {
             const button = (event.target as HTMLButtonElement);
             const input = button.textContent as string;
-            if (this.output.length === 16) {return;}
+            // if (this.output.length === 16) {return;}
             if (this.output === '0'){
+ //stringObject.indexOf(子串，开始检索位置)，找到一个子串，返回子串的第一次出现的位置
                 if ('0123456789'.indexOf(input) >= 0){
                     this.output = input;
                 } else {
