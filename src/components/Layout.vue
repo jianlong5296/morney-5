@@ -1,6 +1,7 @@
 <template>
     <div class="layout-wrapper" :class="classPrefix && `${classPrefix}-wrapper`">
         <div class="content" :class="classPrefix && `${classPrefix}-content`   ">
+<!-- 用于标记往哪个具名插槽中插入子组件内容-->
             <slot/>
         </div>
         <Nav/>
