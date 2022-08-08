@@ -1,7 +1,7 @@
 <template>
     <Layout class-prefix="layout">
         {{recordList}}
-        <NumberPad @update:value="onUpdateAmount" @submit="saveRecord"/>
+        <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
         <Types :value.sync="record.value"/>
         <Notes @update:value="onUpdateNotes"/>
         <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
@@ -15,23 +15,19 @@
     import Notes from '@/components/Money/Notes.vue';
     import Tags from '@/components/Money/Tags.vue';
     import {Component, Watch} from 'vue-property-decorator';
+    import model from '@/model';
 
-    type Record = {  //TS类型声明只写类型，JS类型声明写具体内容
-        tags: string[]
-        notes: string
-        type: string
-        amount: number
-        createdAt: Date
-    }
+    const recordList = model.fetch();
+
 
     @Component({
         components: {Tags, Notes, Types, NumberPad}
     })
     export default class Money extends Vue {
         tags = ['餐饮', '购物', '交通', '娱乐', '医疗'];
-        recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
-        record: Record = {
-            tags: [], notes: '', type: '-', amount: 0
+        recordList: RecordItem[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+        record: RecordItem = {
+            tags: [], notes: '', type: '+', amount: 0
         };
 
         onUpdateAmount(value: string) {
@@ -53,15 +49,14 @@
         saveRecord() {
             // JSON.parse() 用于从一个字符串中解析出json对象
             // JSON.stringfy() 用于从一个对象解析出字符串
-            const record2: Record = JSON.parse(JSON.stringify(this.record));
+            const record2: RecordItem = model.clone(this.record);
             record2.createdAt = new Date();
             this.recordList.push(record2);
-            console.log(this.recordList);
         }
 
         @Watch('recordList')
         onRecordListChange() {
-            window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
+            model.save(this.recordList);
         }
     }
 </script>
