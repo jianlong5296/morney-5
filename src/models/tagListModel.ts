@@ -1,4 +1,5 @@
 import index from '@/store';
+import createId from '@/lib/createId';
 
 const localStorageKeyName = 'tagList';
 type Tag = {
@@ -24,7 +25,8 @@ const tagListModel: TagListModel = {
         if (names.indexOf(name) >= 0) {
             return 'duplicated';
         }
-        this.data.push({id: name, name: name});
+        const id = createId().toString();
+        this.data.push({id, name: name});
         this.save();
         return 'success';
     },
@@ -47,7 +49,7 @@ const tagListModel: TagListModel = {
     remove(id: string) {
         let index = -1;
         for (let i = 0; i < this.data.length; i++) {
-            if (this.data[i].id === id){
+            if (this.data[i].id === id) {
                 index = i;
                 break;
             }
