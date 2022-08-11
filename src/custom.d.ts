@@ -26,4 +26,7 @@ interface Window {   //声明window属性
     removeTag: (id: string) => boolean
     updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
     //也可以写为 updateTag: TagListModel['update']
+    recordList:RecordItem[];
+    createRecord:(record:RecordItem)=>void
+
 }
