@@ -1,4 +1,3 @@
-import index from '@/store';
 import createId from '@/lib/createId';
 
 const localStorageKeyName = 'tagList';
@@ -38,7 +37,7 @@ const tagListModel: TagListModel = {
                 return 'duplicated';
             } else {
                 const tag = this.data.filter(item => item.id === id)[0];
-                tag.name = tag.id = name;
+                tag.name = name;
                 this.save();
                 return 'success';
             }

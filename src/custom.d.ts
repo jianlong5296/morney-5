@@ -20,13 +20,4 @@ type TagListModel = {
 }
 
 interface Window {   //声明window属性
-    tagList: Tag[];
-    createTag: (name: string) => void
-    findTag:(id:string)=> Tag | undefined;
-    removeTag: (id: string) => boolean
-    updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
-    //也可以写为 updateTag: TagListModel['update']
-    recordList:RecordItem[];
-    createRecord:(record:RecordItem)=>void
-
 }
