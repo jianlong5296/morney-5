@@ -8,7 +8,7 @@ const recordStore = {
         this.recordList = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem[];
         return this.recordList;
     },
-    saveRecord() {
+    saveRecords() {
         window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.recordList));
     },
     createRecord(record: RecordItem) {
@@ -16,7 +16,7 @@ const recordStore = {
         record2.createdAt = new Date();
         this.recordList && this.recordList.push(record2);
         //也可以写为 this.recordList?.push(record2); 可选链语法 ES2020
-        recordStore.saveRecord();
+        recordStore.saveRecords();
     },
 };
 
