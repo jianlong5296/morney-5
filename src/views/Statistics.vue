@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <Tabs class-prefix="type" :data-source="recordTypeList" :value.sync="type"/>
-        <ol>
+        <ol v-for="groupedList.length>0">
             <li v-for="(group,index) in groupedList" :key="index">
                 <h3 class="title">{{beautify(group.title)}} <span>￥{{group.total}}</span>></h3>
                 <ol>
@@ -15,6 +15,9 @@
                 </ol>
             </li>
         </ol>
+        <div v-else class="noResult">
+
+        </div>
 
     </Layout>
 </template>
@@ -33,7 +36,7 @@
     })
     export default class Statistics extends Vue {
         tagString(tags: Tag[]) {
-            return tags.length === 0 ? '无' : tags.join(',');
+            return tags.length === 0 ? '无' : tags.map(t=>t.name).join('，');
         }
 
         beautify(string: string) {
@@ -63,7 +66,6 @@
             if (newList.length === 0) {
                 return [];
             }
-
             type Result = { title: string, total?: number, items: RecordItem[] }[]
             const result:Result = [{title: dayjs(recordList[0].createdAt).format('YYYY-MM-DD'), items: [newList[0]]}];
             for (let i = 1; i < newList.length; i++) {
@@ -77,8 +79,6 @@
             }
             result.map(group => {
                 group.total = group.items.reduce((sum, item) => {
-                    console.log(sum);
-                    console.log(item);
                     return sum + item.amount;
                 }, 0);
             });
@@ -94,6 +94,11 @@
     };
 </script>
 <style scoped lang="scss">
+    .noResult{
+        padding: 16px;
+        text-align: center;
+
+    }
     ::v-deep {
         .type-tabs-item {
             background: #c4c4c4;
