@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+<!--        路由的内容显示到此处-->
         <router-view/>
     </div>
 </template>
